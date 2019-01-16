@@ -3,3 +3,4 @@ bin/
 *.war
 *.class
 launchConfigurations/
+.node_modules
