@@ -17,9 +17,9 @@ var ordersDb = cloudant.use('orders');
 exports.create = function(req, res) {
 	ordersDb.insert(req.body, function(err/*, body, header*/) {
 		if (err){
-			res.status(500).send({msg: 'Error on insert, maybe the item already exists: ' + err});
+			res.status(500).send({msg: 'Error on insert, maybe the order already exists: ' + err});
 		} else {
-			res.status(201).send({msg: 'Successfully created item'});
+			res.status(201).send({msg: 'Successfully created order'});
 		}
 	});
 };
@@ -32,7 +32,7 @@ exports.find = function(req, res) {
         if (!err) {
             res.send(body);
         } else {
-            res.send({msg:'Error: could not find item: ' + id});
+            res.send({msg:'Error: could not find order: ' + id});
         }
     });	
 };
