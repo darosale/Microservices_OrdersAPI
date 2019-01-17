@@ -1,0 +1,64 @@
+(function() {
+
+    'use strict';
+
+    var utils = require('./utils.js');
+    var assert = require('chai').assert;
+    var async = require('async');
+
+    /* 
+       sometimes due to timeout the database is left with data added by the FVT test cases, in other words the
+       FVT does not leave database in the same state it started with. In this case some of the testcases may find
+       more row than it expects. I am using async to handle these sutuations  - Umesh P
+    */ 
+
+    describe('API', function() {
+        this.timeout(20000);
+        it('list all orders', function(done) {
+            utils.makeRestCall({method: 'GET'}, '/rest/orders', null, function(err, resp, body) {
+                if (err) console.log("err is ", err);
+                assert(resp.statusCode === 200, 'Unexpected status code: ' + resp.statusCode);
+                //assert(body.total_rows === body.rows.length, "Incorrect total rows: ", body.total_rows);
+                done();
+            });
+        });
+
+        it('add an order', function(done) {
+            var postbody = {name: 'Test Table',color: 'tan', quantity: 5, description: 'A Beautiful table.',usaDollarPrice: 180.00, imgsrc:'http://image.jpg'};
+            utils.makeRestCall({method: 'POST', body: postbody}, '/rest/orders', null, function(err, resp, body) {
+                //console.log(JSON.stringify(body, null, 4));
+                assert(resp.statusCode === 201, 'Unexpected status code: ' + resp.statusCode);
+                assert(body.msg === "Successfully created order", "Incorrect message received: ", body.msg);
+                done();
+            });
+        });
+
+        it('get order using id', function(done) {
+            utils.getOrders('Test Table', function(err, data) {
+                if(err) {
+                    assert.fail("Failed to get orders using name");
+                    done();
+                } else {
+                    if(data.length === 0) {
+                        return done();
+                    }
+                    async.every(data, function(item, callback) {
+                        utils.makeRestCall({method: 'GET'}, '/orders/' + item._id, null, function(err, resp, body) {
+                            //console.log(JSON.stringify(body, null, 4));
+                            if(resp.statusCode === 200) {
+                                return callback(true);
+                            } else {
+                                return callback(false);
+                            }
+                        });
+                    }, function(result) {
+                        if(result === false) {
+                            assert("failed while getting the orders");
+                        }
+                        done();
+                    });
+                }
+            });
+        });
+    });
+}());

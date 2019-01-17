@@ -49,6 +49,16 @@ var gruntConfig = {
                 quite: true
             },
             src: ['tests/fvt/*.spec.js']
+        },
+        'integration-test': {
+            options: {
+                reporter: 'XUnit',
+                clearRequireCache: true,
+                colors: true,
+                quite: true,
+                captureFile: 'tests/integration_tests/mocha_integration_test.xml'
+            },
+            src: ['tests/integration_tests/*.spec.js']
         }
     },
 
@@ -179,7 +189,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dev-test-cov', ['env:test', 'clean:coverage', 'copy:resourcesForInstrumented', 'instrument', 'mochaTest:server-side', 'storeCoverage', 'makeReport-lcov', 'makeReport']);
     grunt.registerTask('dev-fvtspec', ['env:test', 'clean:coverage', 'mochaTest:fvt-spec']);
     grunt.registerTask('dev-fvt', ['env:test', 'clean:coverage', 'mochaTest:fvt']);
-
+    grunt.registerTask('dev-integration-test', ['env:test', 'clean:coverage', 'mochaTest:integration-test']);
     grunt.registerTask('test_real', ['env:chrome', 'simplemocha:sauce:' + _(desireds).keys().first()]);
     grunt.registerTask('test_fake', ['env:chrome', 'simplemocha:sauce_node:' + _(desireds).keys().first()]);
 };

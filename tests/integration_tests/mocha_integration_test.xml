@@ -1,0 +1,5 @@
+<testsuite name="Mocha Tests" tests="3" failures="0" errors="0" skipped="0" timestamp="Thu, 17 Jan 2019 20:23:43 GMT" time="0.793">
+<testcase classname="API" name="list all orders in DB" time="0.604"/>
+<testcase classname="API" name="add an order to DB" time="0.1"/>
+<testcase classname="API" name="get the order with specific id" time="0.085"/>
+</testsuite>

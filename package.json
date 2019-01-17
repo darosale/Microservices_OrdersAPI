@@ -21,8 +21,6 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "rewire": "^4.0.1",
-    "sinon": "^7.2.2",
     "chai-as-promised": "6.0.0",
     "colors": "latest",
     "grunt": "~0.4.5",
@@ -37,6 +35,9 @@
     "grunt-simple-mocha": "latest",
     "lodash": "latest",
     "mocha": "^2.3.3",
+    "request": "^2.88.0",
+    "rewire": "^4.0.1",
+    "sinon": "^7.2.2",
     "spec-xunit-file": "0.0.1-3"
   }
 }
