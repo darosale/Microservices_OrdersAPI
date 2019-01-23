@@ -55,7 +55,8 @@ exports.list = function(req, res) {
 		    res.send(result);
   		}
 	});
-}
+};
+
 /* list all orders */
 exports.listJson = function(req, res) {
 	ordersDb.list({include_docs: true}, function(err, body/*, headers*/) {
@@ -71,4 +72,4 @@ exports.listJson = function(req, res) {
 		    }
   		}
 	});
-};;
+};

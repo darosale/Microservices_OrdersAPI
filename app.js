@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'www')));
 
 //REST HTTP Methods
 var orders = require('./routes/orders');
-app.get('/rest/ordersJson', orders.ordersJson);
+app.get('/rest/ordersJson', orders.listJson);
 app.get('/rest/orders', orders.list);
 app.get('/rest/orders/:id', orders.find);
 app.post('/rest/orders', orders.create);
