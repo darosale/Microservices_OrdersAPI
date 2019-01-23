@@ -55,4 +55,20 @@ exports.list = function(req, res) {
 		    res.send(result);
   		}
 	});
-};
+}
+/* list all orders */
+exports.listJson = function(req, res) {
+	ordersDb.list({include_docs: true}, function(err, body/*, headers*/) {
+  		if (err) {
+    		// something went wrong!
+			res.status(500).send({msg: "'list' failed: " + err});			
+  		} else {
+			var result = "";
+			if (!body.rows || body.rows.length === 0) {
+				res.send("No orders logged");
+			} else {
+		    	res.json(body.rows);
+		    }
+  		}
+	});
+};;
