@@ -67,7 +67,7 @@ exports.listJson = function(req, res) {
 			if (!body.rows || body.rows.length === 0) {
 				res.send("No orders logged");
 			} else {
-		    	res.json(body.rows);
+		    	res.send(body.rows);
 		    }
   		}
 	});
