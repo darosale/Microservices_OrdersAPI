@@ -2,7 +2,7 @@
 
 
 APPSCAN_APP_ID=${APPSCAN_APP_ID:-"266048bc-1695-e711-80ba-002324b5f40c"}
-APPSCAN_SCAN_NAME="catalog-api"
+APPSCAN_SCAN_NAME="orders-api"
 APPSCAN_URL="https://ui.appscan.ibmcloud.com/AsoCUI/serviceui/main/myapps/oneapp/$APPSCAN_APP_ID/scans"
 
 
