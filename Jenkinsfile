@@ -16,6 +16,7 @@ pipeline {
 
                     ./static_scan.sh
                 '''
+                archiveArtifacts artifacts:'orders-api/*'
             }
         }
     }
